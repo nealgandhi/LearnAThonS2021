@@ -1,0 +1,87 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #121212;
+    color: #ffffff
+}
+
+body, html {
+    height: 100vh;
+}
+.menu {
+    font-size: 2.5rem;
+}
+.menu-label {
+    color: white;
+    font-size: 2rem;
+}
+
+.menu {
+    color: white;
+}
+
+nav.navbar {
+    height: 5rem;
+    background-color: #741BAE;
+}
+
+nav.navbar-menu {
+    font-size: 200rem;
+    color:whitesmoke;
+    background-color:#121212;
+}
+
+nav.navbar-end:hover {
+    color: #ffffff;
+    background-color: #741BAE!important;
+}
+navbar-link:hover {
+    color: #121212;
+}
+
+.navbar-link {
+    color: white;
+}
+
+.navbar-item:hover {
+    background:#741BAE!important;
+}
+
+.navbar-item {
+    color: white;
+}
+
+.button{
+    background-color: #741BAE;
+    color: #ffffff;
+}
+
+.textarea {
+    height: 80vh;
+}
+
+.menu-list a {
+    color: #ffffff;
+    background-color: #121212;
+    font-size: 1.5rem;
+}
+
+.menu-list:hover a {
+    background-color: #121212;
+    color: #ffffff !important;
+}
+
+.label {
+    font-size: 2.5rem;
+    margin-bottom: 200px;
+}
+
+.button {
+    background-color: #741BAE;
+    color: #ffffff;
+    border: transparent;
+
+}
+
+.has-text-grey-light {
+    font-size: 1.5rem;
+}

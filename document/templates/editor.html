@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-
 <html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Lineup</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     </head>
 
-    <body>
-        <nav class="navbar is-dark">
+    <bodyf>
+        <nav class="navbar">
             <div class="navbar-brand">
                 <a href="{% url 'editor' %}" class="navbar-item">Lineup</a>
             </div>
@@ -24,7 +28,7 @@
         <section class="section">
             <div class="columns">
                 <div class="column is-2">
-                    <aside class="menu">
+                    <aside class="menu" class="has-text-primary-light" class=>python
                         <p class="menu-label">Documents</p>
 
                         <ul class="menu-list">
@@ -70,7 +74,7 @@
 
                         <div class="field is-grouped">
                             <div class="control">
-                                <button class="button is-primary">Save</button>
+                                <button class="button">Save</button>
                             </div>
                             {% if document %}
                                 <div class="control">
