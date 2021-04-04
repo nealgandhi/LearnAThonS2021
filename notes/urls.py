@@ -14,12 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-
-from document.views import editor, delete_document
+from django.urls import include, path
 
 urlpatterns = [
-    path('', editor, name='editor'),
-    path('delete_document/<int:docid>/', delete_document, name='delete_document'),
     path('admin/', admin.site.urls),
+    path('doc/', include('document.urls')),
 ]
