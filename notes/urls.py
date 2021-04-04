@@ -22,4 +22,17 @@ urlpatterns = [
     path('', editor, name='editor'),
     path('delete_document/<int:docid>/', delete_document, name='delete_document'),
     path('admin/', admin.site.urls),
+
+    # TODO: create more templates:
+    #  - registration/logged_out.html
+    #  - registration/password_change_form.html
+    #  - registration/password_change_done.html
+    #  - registration/password_reset_form.html
+    #  - registration/password_reset_done.html
+    #  - registration/password_reset_confirm.html
+    #  - registration/password_reset_complete.html
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('accounts.urls')),
+
+    path('doc/', include('document.urls')),
 ]

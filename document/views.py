@@ -1,43 +1,55 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
+from django import views
+from django.http.request import HttpRequest
+from django.urls import reverse_lazy
 
 from .models import Document
 
-def editor(request):
-    docid = int(request.GET.get('docid', 0))
-    documents = Document.objects.all()
 
-    if request.method == 'POST':
-        docid = int(request.POST.get('docid', 0))
+class NewDocumentView(views.View):
+    def get(self, request: HttpRequest):
+        return render(request, 'document.html', {
+            'documents': Document.objects.filter(owner=request.user),
+        })
+
+    def post(self, request: HttpRequest):
+        owner = request.user
         title = request.POST.get('title')
-        content = request.POST.get('content', '')
+        content = request.POST.get('content')
+        document = Document.objects.create(owner=owner, title=title, content=content)
 
-        if docid > 0:
-            document = Document.objects.get(pk=docid)
-            document.title = title
-            document.content = content
-            document.save()
+        return redirect(reverse_lazy('document', kwargs={'doc_id':document.id}))
 
-            return redirect('/?docid=%i' % docid)
-        else:
-            document = Document.objects.create(title=title, content=content)
 
-            return redirect('/?docid=%i' % document.id)
+class DocumentView(views.View):
+    def get(self, request: HttpRequest, doc_id: int):
+        try:
+            document = Document.objects.get(pk=doc_id)
+        except ObjectDoesNotExist:
+            document = None
 
-    if docid > 0:
-        document = Document.objects.get(pk=docid)
-    else:
-        document = ''
+        return render(request, 'document.html', {
+            'documents': Document.objects.filter(owner=request.user),
+            'document': document,
+        })
 
-    context = {
-        'docid': docid,
-        'documents': documents,
-        'document': document
-    }
+    def post(self, request: HttpRequest, doc_id: int):
+        title = request.POST.get('title')
+        content = request.POST.get('content')
 
-    return render(request, 'editor.html', context)
+        document = Document.objects.get(pk=doc_id)
+        document.title = title
+        document.content = content
+        document.save()
 
-def delete_document(request, docid):
-    document = Document.objects.get(pk=docid)
-    document.delete()
+        return redirect(reverse_lazy('document', kwargs={'doc_id':document.id}))
 
-    return redirect('/?docid=0')
+
+def delete_document(request: HttpRequest, doc_id: int):
+    try:
+        Document.objects.get(pk=doc_id).delete()
+    except ObjectDoesNotExist:
+        pass  # deleting a document that doesn't exist is fine? maybe?
+
+    return redirect(reverse_lazy('new_document'))
