@@ -16,12 +16,12 @@
     <body>
         <nav class="navbar">
             <div class="navbar-brand">
-                <a href="{% url 'new_document' %}" class="navbar-item">Lineup</a>
+                <a href="{% url 'new_document' %}" class="navbar-item"><b>Lineup</b></a>
             </div>
 
             <div class="navbar-menu">
                 <div class="navbar-end">
-                    <a href="{% url 'new_document' %}" class="navbar-item">New document</a>
+                    <a href="{% url 'new_document' %}" class="navbar-item"><b>New document</b></a>
                 </div>
             </div>
         </nav>
@@ -29,8 +29,8 @@
         <section class="section">
             <div class="columns">
                 <div class="column is-2">
-                    <aside class="menu" class="has-text-primary-light" class=>python
-                        <p class="menu-label">Documents</p>
+                    <aside class="menu" class="has-text-primary-light" class=>
+                        <p class="menu-label"><b>Documents</b></p>
 
                         <ul class="menu-list">
                             {% for doc in documents %}
@@ -55,11 +55,11 @@
 
                         <div class="field">
                             <label class="label">
-                                Title
+                                <b>Title</b>
 
                                 {% if document %}
                                     <span class="has-text-grey-light">
-                                        Created at: {{ document.created_at|date:"m/d Y" }} / 
+                                        Created at: {{ document.created_at|date:"m/d Y" }}  /
                                         Modified at: {{ document.modified_at|date:"m/d Y" }}
                                     </span>
                                 {% endif %}
@@ -71,7 +71,7 @@
                         </div>
 
                         <div class="field">
-                            <label class="label">Content</label>
+                            <label class="label"><b>Content</b></label>
 
                             <div class="control">
                                 <textarea class="textarea" name="content" placeholder="Content">{% if document %}{{ document.content }}{% endif %}</textarea>
@@ -80,11 +80,11 @@
 
                         <div class="field is-grouped">
                             <div class="control">
-                                <button class="button" type="submit">Save</button>
+                                <button class="button" type="submit"><b>Save</b></button>
                             </div>
                             {% if document %}
                                 <div class="control">
-                                    <a href="{% url 'delete_document' document.id %}" class="button is-danger">Delete</a>
+                                    <a href="{% url 'delete_document' document.id %}" class="button is-danger"><b>Delete</b></a>
                                 </div>
                             {% endif %}
                         </div>
