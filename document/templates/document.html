@@ -11,12 +11,12 @@
     <body>
         <nav class="navbar is-dark">
             <div class="navbar-brand">
-                <a href="{% url 'editor' %}" class="navbar-item">Lineup</a>
+                <a href="{% url 'new_document' %}" class="navbar-item">Lineup</a>
             </div>
 
             <div class="navbar-menu">
                 <div class="navbar-end">
-                    <a href="{% url 'editor' %}?docid=0" class="navbar-item">New document</a>
+                    <a href="{% url 'new_document' %}" class="navbar-item">New document</a>
                 </div>
             </div>
         </nav>
@@ -30,7 +30,7 @@
                         <ul class="menu-list">
                             {% for doc in documents %}
                                 <li>
-                                    <a href="{% url 'editor' %}?docid={{ doc.id }}">{{ doc.title }}</a>
+                                    <a href="{% url 'document' doc.id %}">{{ doc.title }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -38,10 +38,15 @@
                 </div>
 
                 <div class="column is-10">
-                    <form method="post" action="{% url 'editor' %}">
+                    <form
+                            method="post"
+                            {% if document %}
+                                action="{% url 'document' document.id %}"
+                            {% else %}
+                                action="{% url 'new_document' %}"
+                            {% endif %}
+                    >
                         {% csrf_token %}
-
-                        <input type="hidden" name="docid" value="{{ docid }}">
 
                         <div class="field">
                             <label class="label">
@@ -70,7 +75,7 @@
 
                         <div class="field is-grouped">
                             <div class="control">
-                                <button class="button is-primary">Save</button>
+                                <button class="button is-primary" type="submit">Save</button>
                             </div>
                             {% if document %}
                                 <div class="control">

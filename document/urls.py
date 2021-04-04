@@ -1,9 +1,9 @@
-from django.contrib import admin
 from django.urls import path
 
-from document.views import editor, delete_document
+from .views import NewDocumentView, DocumentView, delete_document
 
 urlpatterns = [
-    path('', editor, name='editor'),
-    path('delete_document/<int:docid>/', delete_document, name='delete_document'),
+    path('', NewDocumentView.as_view(), name='new_document'),
+    path('<int:doc_id>/', DocumentView.as_view(), name='document'),
+    path('<int:doc_id>/delete', delete_document, name='delete_document')
 ]
